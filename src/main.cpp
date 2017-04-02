@@ -1,6 +1,10 @@
 #include <iostream>
+#include "vulkan/vulkan.hpp"
+#include "engine/render.h"
+#include "script/js.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    render::driverInfo();
+    js::say_hello_world();
     return 0;
 }
