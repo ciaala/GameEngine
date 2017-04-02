@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(TTT)
+project(GameEngine)
 
 set(CMAKE_CXX_STANDARD 14)
 set(V8_LIBRARIES
@@ -26,9 +26,9 @@ set(SOURCE_FILES
         )
 
 
-add_executable(TTT ${SOURCE_FILES})
-target_include_directories(TTT
+add_executable(GameEngine ${SOURCE_FILES})
+target_include_directories(GameEngine
         PUBLIC /opt/v8/include
         PUBLIC /opt/VulkanSDK/1.0.42.2/x86_64/include
         PUBLIC /opt/VulkanSDK/1.0.42.2/samples/API-Samples/utils)
-target_link_libraries(TTT PUBLIC ${LIBRARIES})
+target_link_libraries(GameEngine PUBLIC ${LIBRARIES})
