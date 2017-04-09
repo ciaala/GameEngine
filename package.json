@@ -1,0 +1,27 @@
+{
+  "name": "game-engine",
+  "version": "0.0.0",
+  "description": "GameEngine is a module for nodejs that act as a scripting interface for the vulkan game engine",
+  "main": "src/js/app.js",
+  "dependencies": {
+    "async": "^2.3.0",
+    "shelljs": "^0.7.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciaala/GameEngine.git"
+  },
+  "keywords": [
+    "game-engine"
+  ],
+  "author": "Francesco Fiduccia <francesco.fiduccia@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ciaala/GameEngine/issues"
+  },
+  "homepage": "https://github.com/ciaala/GameEngine#readme"
+}

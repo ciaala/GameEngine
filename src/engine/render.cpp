@@ -17,9 +17,9 @@ typedef struct {
     std::vector<VkQueueFamilyProperties> queue_props;
     VkDevice device;
     VkPhysicalDeviceProperties physicalDeviceProperties;
-} TvkInfo;
+} RenderInfo;
 
-void init_global_layer_properties(TvkInfo &info) {
+void init_global_layer_properties(RenderInfo &info) {
     info.appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     info.appInfo.pNext = nullptr;
     info.appInfo.apiVersion = VK_MAKE_VERSION(1, 0, 3);
@@ -28,7 +28,7 @@ void init_global_layer_properties(TvkInfo &info) {
     info.appInfo.applicationVersion = 0;
 }
 
-void init_instance(TvkInfo &info) {
+void init_instance(RenderInfo &info) {
 
     info.instInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     info.instInfo.pNext = nullptr;
@@ -43,7 +43,7 @@ void init_instance(TvkInfo &info) {
     assert(res == VK_SUCCESS);
 }
 
-void init_enumerate_device(TvkInfo &info) {
+void init_enumerate_device(RenderInfo &info) {
     uint32_t gpu_count;
     VkResult res = vkEnumeratePhysicalDevices(info.instance, &gpu_count, NULL);
     info.gpus.resize(gpu_count);
@@ -53,19 +53,19 @@ void init_enumerate_device(TvkInfo &info) {
 
 }
 
-void destroy_instance(TvkInfo &info) {
+void destroy_instance(RenderInfo &info) {
     vkDestroyDevice(info.device, NULL);
     vkDestroyInstance(info.instance, NULL);
 }
 
-void print_info(TvkInfo &info) {
+void print_info(RenderInfo &info) {
     std::cout << "Number of Valid GPUs: " << info.gpus.size() << std::endl;
     std::cout << "         Device Name: " << info.physicalDeviceProperties.deviceName << std::endl;
     std::cout << "         Device Type: " << info.physicalDeviceProperties.deviceType << std::endl;
 }
 
 void dumpDriverInfo() {
-    TvkInfo info;
+    RenderInfo info;
     init_global_layer_properties(info);
     init_instance(info);
 

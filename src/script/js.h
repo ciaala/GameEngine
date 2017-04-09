@@ -10,6 +10,7 @@
 class js {
 public:
     static void say_hello_world();
+
 };
 
 
