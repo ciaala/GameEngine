@@ -4,11 +4,10 @@
 var app = function () {
     var self = this;
     //var async_test = require('./async_test');
-    var prime = require('./prime');
+    //var prime = require('./prime');
+    var entry = require("./prime");
     self.run = function () {
-
-        console.log('loading async_test');
-        var at = new prime();
+        var at = new entry();
         at.start(Math.pow(10, 6));
 
         while (!at.isDone) {

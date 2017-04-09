@@ -5,7 +5,8 @@
   "main": "src/js/app.js",
   "dependencies": {
     "async": "^2.3.0",
-    "shelljs": "^0.7.7"
+    "shelljs": "^0.7.7",
+    "webworker-threads": "^0.7.11"
   },
   "devDependencies": {},
   "scripts": {

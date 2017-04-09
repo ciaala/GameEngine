@@ -11,7 +11,7 @@ var moduleName = "[GameEngine JavaScript Environment] execution time";
 // console.log(moduleName + "Starting: " + moduleStartTime);
 console.time(moduleName);
 var app = require('./app.js');
-
+console.log('app is running');
 new app().run();
 // var moduleStopTime = new Date();
 // console.log(moduleName + "Stopping: " + moduleStopTime);
