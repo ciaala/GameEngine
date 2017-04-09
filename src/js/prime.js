@@ -8,11 +8,16 @@
  * @param primes{Array}
  * @param lastPrimeIndex{int}
  */
-var prime = function () {
+var prime = function (MaxThreads) {
+    if (MaxThreads === undefined || MaxThreads === null) {
+        console.log("MaxThreads is undefined");
+        MaxThreads = 4;
+    }
+    var async = require('async');
+    var MAX_THREADS = MaxThreads;
     var self = this;
     var primes = [2];
     var lastPrimeIndex = 0;
-    const MAX_VALUE = Math.pow(10, 6);
 //const MAX_VALUE = 1299709
     var counterToNextIndex = Math.pow(primes[0], 2) - 3;
     var even = false;
@@ -39,43 +44,80 @@ var prime = function () {
         }
         return true;
     };
-
+    self.doNothing = function () {
+        var data = "";
+        for (var i = 0; i < arguments.length; i++) {
+            data = data + ", " + arguments[i]
+        }
+        console.log(arguments[0] + ", " + arguments[2] + ", " + arguments[3]);
+        return false;
+    };
 
     self.check_parallel_prime = function (i, primes, lastPrimeIndex) {
-        var elementCount = primes.length() / 4;
+        var elementCount = Math.floor(lastPrimeIndex / (MAX_THREADS + 1));
+        var isParallelDone = false;
+        var finalResult = true;
         var tasks = [];
-        for (var thread = 0; thread < 3; thread++) {
-            var asyncTask = function () {
-                return check_prime(i, primes, thread * elementCount, (thread + 1) * elementCount);
-            };
+        for (var thread = 0; thread < MAX_THREADS; thread++) {
+            var asyncTask = (function (start, end) {
+                return function (callback) {
+                    callback(null, self.check_prime(i, primes, start, end));
+                }
+            })(thread * elementCount, (thread + 1) * elementCount);
             tasks.push(asyncTask);
         }
-        tasks.push(function () {
-            return check_prime(i, primes, t)
+        tasks.push(function (callback) {
+                var isPrime = self.check_prime(i, primes, thread * elementCount, lastPrimeIndex);
+                if (isPrime) {
+                    callback(null, true);
+                } else {
+                    callback(false, false);
+                }
+            }
+        );
+        async.parallel(tasks, function (error, results) {
+            if (error !== null && error !== undefined) {
+                finalResult = false;
+            } else {
+                for (var i = 0; finalResult && (i < results.length); i++) {
+                    finalResult = finalResult && results[i];
+                }
+            }
+            isParallelDone = true;
         });
+        while (!isParallelDone) {
 
+        }
+        //console.log(i + " -> " + finalResult);
+        return finalResult;
     };
-    self.start = function () {
+    self.start = function (MAX_VALUE) {
         for (var i = 3; primes.length < MAX_VALUE; i++, even = !even) {
 
-            //var maxDividend = Math.floor(Math.sqrt(i));
+            //var maxDividend = Math.floor(Math.sqrt(i))
+            var isPrime = false;
             if (!even) {
-                if (i > 1001) {
-                    isPrime = check_parallel_prime(i, primes, lastPrimeIndex);
+
+                if (i > 100001) {
+                    isPrime = self.check_parallel_prime(i, primes, lastPrimeIndex);
                 } else {
-                    isPrime = check_prime(i, primes, 0, lastPrimeIndex);
+                    isPrime = self.check_prime(i, primes, 0, lastPrimeIndex);
                 }
-                primes.push(i);
                 //console.log(i + " - " + primes[lastPrimeIndex] + " - " + counterToNextIndex);
             }
-        }
-        counterToNextIndex--;
+            if (isPrime) {
+                primes.push(i);
+            }
 
-        if (counterToNextIndex === 0) {
-            lastPrimeIndex++;
-            counterToNextIndex = Math.pow(primes[lastPrimeIndex], 2) - i;
+            counterToNextIndex--;
+
+            if (counterToNextIndex === 0) {
+                lastPrimeIndex++;
+                counterToNextIndex = Math.pow(primes[lastPrimeIndex], 2) - i;
+            }
         }
-    };
+        self.resultAnalyser();
+    }
     self.resultAnalyser = function () {
         console.log("Primes discovered: " + primes.length + ', last: ' + primes[primes.length - 1]);
         self.isDone = true;
