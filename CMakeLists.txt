@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.7)
 project(GameEngine)
 
+#SET (CMAKE_C_COMPILER             "/usr/lib/llvm/4/bin/clang")
+#SET (CMAKE_CXX_COMPILER             "/usr/lib/llvm/4/bin/clang++")
+
 set(CMAKE_CXX_STANDARD 14)
 #set(V8_LIBRARIES
 #        /opt/v8/out.gn/x64.release/libv8.so
@@ -23,12 +26,12 @@ set(LIBRARIES ${VULKAN_LIBRARIES} ${V8_LIBRARIES} ${NODEJS_LIBRARIES})
 
 set(SOURCE_FILES
         src/main.cpp
-        src/engine/render.cpp
-        src/engine/render.h
+        src/engine/render/Render.cpp
+        src/engine/render/Render.h
         #src/script/js.cpp
         #src/script/js.h
 
-        src/script/njs.cpp src/script/njs.h)
+        src/engine/script/njs.cpp src/engine/script/njs.h src/engine/engine.cpp src/engine/engine.h)
 
 
 add_executable(GameEngine ${SOURCE_FILES})

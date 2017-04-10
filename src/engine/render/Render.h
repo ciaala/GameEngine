@@ -6,9 +6,10 @@
 #define TTT_RENDER_H
 
 
-class render {
+class Render {
 public:
-    static void driverInfo();
+    Render();
+    void driverInfo();
 };
 
 

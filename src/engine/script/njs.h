@@ -9,7 +9,7 @@
 class njs {
 public:
 
-    static void say_hello_world(int argc, char **argv);
+    void say_hello_world(int argc, char **argv);
 };
 
 

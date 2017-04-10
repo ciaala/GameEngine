@@ -1,12 +1,19 @@
 #include <iostream>
 #include "vulkan/vulkan.hpp"
-#include "engine/render.h"
-#include "script/njs.h"
+#include "engine/engine.h"
 
 int main(int argc, char** argv) {
+
+
     std::cout << "Start" << std::endl;
-    render::driverInfo();
-    njs::say_hello_world(argc, argv);
+
+    engine engine;
+    engine.setup(argc, argv);
+    engine.start();
+
+    engine.stop();
+
     std::cout << "Exit" << std::endl;
+
     return 0;
 }

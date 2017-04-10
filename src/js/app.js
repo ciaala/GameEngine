@@ -5,10 +5,12 @@ var app = function () {
     var self = this;
     //var async_test = require('./async_test');
     //var prime = require('./prime');
-    var entry = require("./prime");
+    var moduleId = "./prime";
+    console.log("Loading module: " + moduleId);
+    var entry = require(moduleId);
     self.run = function () {
         var at = new entry();
-        at.start(Math.pow(10, 6));
+        at.start(Math.pow(10, 3));
 
         while (!at.isDone) {
         }

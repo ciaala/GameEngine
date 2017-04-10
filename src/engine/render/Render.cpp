@@ -4,7 +4,7 @@
 
 #include "vulkan/vulkan.h"
 #include <iostream>
-#include "render.h"
+#include "Render.h"
 #include <vector>
 #include <cassert>
 
@@ -123,6 +123,10 @@ void dumpDriverInfo() {
 
 }
 
-void render::driverInfo() {
+void Render::driverInfo() {
     dumpDriverInfo();
+}
+
+Render::Render() {
+
 }
