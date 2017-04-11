@@ -15,9 +15,18 @@ void engine::setup(int argc, char **argv) {
 }
 
 void engine::start() {
-    render->driverInfo();
+    render->dumpDriverInfo();
 }
 
 void engine::stop() {
 
+}
+
+engine::~engine() {
+    if (script != nullptr) {
+        delete script;
+    }
+    if (render != nullptr) {
+        delete render;
+    }
 }

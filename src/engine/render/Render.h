@@ -6,10 +6,14 @@
 #define TTT_RENDER_H
 
 
+#include "DriverInfo.h"
+
 class Render {
+    DriverInfo driverInfo;
 public:
     Render();
-    void driverInfo();
+    void dumpDriverInfo();
+
 };
 
 

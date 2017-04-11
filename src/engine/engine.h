@@ -14,6 +14,7 @@ private:
     njs *script;
 public:
     engine();
+    ~engine();
     void setup(int argc, char **argv);
 
     void start();

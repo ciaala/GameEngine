@@ -9,5 +9,6 @@
 void njs::say_hello_world(int argc, char **argv) {
     std::cout << "Start module" << std::endl << std::flush;
     node::Start(argc, argv);
+    node::
     std::cout << "Stop module" << std::endl << std::flush;
 }

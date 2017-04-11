@@ -31,7 +31,7 @@ set(SOURCE_FILES
         #src/script/js.cpp
         #src/script/js.h
 
-        src/engine/script/njs.cpp src/engine/script/njs.h src/engine/engine.cpp src/engine/engine.h)
+        src/engine/script/njs.cpp src/engine/script/njs.h src/engine/engine.cpp src/engine/engine.h src/engine/render/DriverInfo.cpp src/engine/render/DriverInfo.h)
 
 
 add_executable(GameEngine ${SOURCE_FILES})

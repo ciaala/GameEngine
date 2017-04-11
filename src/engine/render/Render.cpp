@@ -3,6 +3,8 @@
 //
 
 #include "vulkan/vulkan.h"
+#include "vulkan/vulkan.hpp"
+
 #include <iostream>
 #include "Render.h"
 #include <vector>
@@ -58,11 +60,6 @@ void destroy_instance(RenderInfo &info) {
     vkDestroyInstance(info.instance, NULL);
 }
 
-void print_info(RenderInfo &info) {
-    std::cout << "Number of Valid GPUs: " << info.gpus.size() << std::endl;
-    std::cout << "         Device Name: " << info.physicalDeviceProperties.deviceName << std::endl;
-    std::cout << "         Device Type: " << info.physicalDeviceProperties.deviceType << std::endl;
-}
 
 void dumpDriverInfo() {
     RenderInfo info;
@@ -123,10 +120,10 @@ void dumpDriverInfo() {
 
 }
 
-void Render::driverInfo() {
-    dumpDriverInfo();
+void Render::dumpDriverInfo() {
+    this->driverInfo.dump();
 }
-
+using namespace vk;
 Render::Render() {
-
+    vk::createInstance();
 }
