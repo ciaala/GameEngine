@@ -3,7 +3,17 @@ project(GameEngine)
 
 #SET (CMAKE_C_COMPILER             "/usr/lib/llvm/4/bin/clang")
 #SET (CMAKE_CXX_COMPILER             "/usr/lib/llvm/4/bin/clang++")
-
+if(MSVC)
+    # Force to always compile with W4
+    if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+        string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+    else()
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+    endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+    # Update if necessary
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+endif()
 set(CMAKE_CXX_STANDARD 14)
 #set(V8_LIBRARIES
 #        /opt/v8/out.gn/x64.release/libv8.so
@@ -31,7 +41,7 @@ set(SOURCE_FILES
         #src/script/js.cpp
         #src/script/js.h
 
-        src/engine/script/njs.cpp src/engine/script/njs.h src/engine/engine.cpp src/engine/engine.h src/engine/render/DriverInfo.cpp src/engine/render/DriverInfo.h)
+        src/engine/script/njs.cpp src/engine/script/njs.h src/engine/engine.cpp src/engine/engine.h src/engine/render/DriverInfo.cpp src/engine/render/DriverInfo.h src/engine/presenter/Presenter.cpp src/engine/presenter/Presenter.h src/engine/memory/MemoryManager.cpp src/engine/memory/MemoryManager.h src/engine/presenter/Window.cpp src/engine/presenter/Window.h)
 
 
 add_executable(GameEngine ${SOURCE_FILES})

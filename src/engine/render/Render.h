@@ -12,8 +12,10 @@ class Render {
     DriverInfo driverInfo;
 public:
     Render();
-    void dumpDriverInfo();
 
+    const DriverInfo& getDriverInfo();
+
+    const vk::Instance & getInstance();
 };
 
 

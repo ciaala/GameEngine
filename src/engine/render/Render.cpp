@@ -21,6 +21,8 @@ typedef struct {
     VkPhysicalDeviceProperties physicalDeviceProperties;
 } RenderInfo;
 
+void print_info(RenderInfo &info);
+
 void init_global_layer_properties(RenderInfo &info) {
     info.appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     info.appInfo.pNext = nullptr;
@@ -120,10 +122,20 @@ void dumpDriverInfo() {
 
 }
 
-void Render::dumpDriverInfo() {
-    this->driverInfo.dump();
+void print_info(RenderInfo &info) {
+
 }
+
 using namespace vk;
 Render::Render() {
-    vk::createInstance();
+
 }
+
+const Instance & Render::getInstance() {
+    return this->driverInfo.getInstance();
+}
+
+const DriverInfo &Render::getDriverInfo() {
+    return this->driverInfo;
+}
+

@@ -7,9 +7,11 @@
 
 #include "render/Render.h"
 #include "script/njs.h"
+#include "presenter/Presenter.h"
 
 class engine {
 private:
+    Presenter *presenter;
     Render *render;
     njs *script;
 public:
@@ -20,6 +22,8 @@ public:
     void start();
 
     void stop();
+
+
 };
 
 
